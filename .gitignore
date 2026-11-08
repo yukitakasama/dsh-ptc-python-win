@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Local agent memory: workspace notes and handoff state, never published.
+AGENTS.local.md
+CLAUDE.local.md
+
+# AgentTeams runtime state (created per team under the workspace)
+.agent-teams/
+
+# Test and debug artifacts
+*.log
+*.tgz
+coverage/
+.ptc-python-*
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,65 @@
+{
+  "name": "dsh-ptc-python-win",
+  "version": "0.1.0",
+  "description": "CPython PTC runtime provider for DeepSeek Harness on Windows: run_code programs are Python, tools are called as await tools.name({...}).",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./py/bootstrap.py": "./py/bootstrap.py",
+    "./presets/ptc-python.patch.yml": "./presets/ptc-python.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "py",
+    "presets",
+    "docs",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": [
+        "./presets/ptc-python.patch.yml"
+      ]
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-tool",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js && node --check test/smoke.mjs",
+    "test": "node test/smoke.mjs",
+    "prepublishOnly": "npm run check"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "ptc",
+    "python",
+    "run_code"
+  ],
+  "author": "yukitakasama",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukitakasama/dsh-ptc-python-win.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yukitakasama/dsh-ptc-python-win/issues"
+  },
+  "homepage": "https://github.com/yukitakasama/dsh-ptc-python-win#readme",
+  "license": "MIT"
+}
