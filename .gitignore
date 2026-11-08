@@ -8,6 +8,9 @@ CLAUDE.local.md
 # AgentTeams runtime state (created per team under the workspace)
 .agent-teams/
 
+# Local gh CLI cache (redirected here because the sandbox blocks AppData)
+.ghcache/
+
 # Test and debug artifacts
 *.log
 *.tgz

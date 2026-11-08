@@ -7,6 +7,7 @@
  * every run spawns real Python processes).
  */
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { createPythonRuntime } from '../lib/index.js'
@@ -198,7 +199,10 @@ test('runs inside the requested working directory', async () => {
 		}),
 	)
 	assert.equal(result.error, undefined, JSON.stringify(result.error))
-	assert.equal(result.value.toLowerCase(), path.resolve(target).toLowerCase())
+	// Windows can hand out an 8.3 short name (RUNNER~1); Python resolves it to the
+	// long form, so compare canonical paths instead of the raw strings.
+	const expected = fs.realpathSync.native(path.resolve(target)).toLowerCase()
+	assert.equal(result.value.toLowerCase(), expected, `cwd ${result.value} vs ${expected}`)
 })
 
 test('prints non-ASCII text intact', async () => {
